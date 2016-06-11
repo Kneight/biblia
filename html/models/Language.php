@@ -10,13 +10,11 @@ use Yii;
  * @property integer $id
  * @property string $name
  * @property string $code
- * @property string $dam_ot
- * @property string $dam_nt
+ * @property string $id_ot
+ * @property string $id_nt
  *
- * @property Document[] $documents
- * @property Document[] $documents0
- * @property Teaching[] $teachings
- * @property Teaching[] $teachings0
+ * @property Resource[] $resources
+ * @property Resource[] $resources0
  */
 class Language extends \yii\db\ActiveRecord
 {
@@ -34,8 +32,8 @@ class Language extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'code', 'dam_ot', 'dam_nt'], 'required'],
-            [['name', 'code', 'dam_ot', 'dam_nt'], 'string', 'max' => 45]
+            [['name', 'code', 'id_ot', 'id_nt'], 'required'],
+            [['name', 'code', 'id_ot', 'id_nt'], 'string', 'max' => 45]
         ];
     }
 
@@ -48,40 +46,24 @@ class Language extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'code' => 'Code',
-            'dam_ot' => 'Dam Ot',
-            'dam_nt' => 'Dam Nt',
+            'id_ot' => 'Id Ot',
+            'id_nt' => 'Id Nt',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDocuments()
+    public function getResources()
     {
-        return $this->hasMany(Document::className(), ['primary_language_id' => 'id']);
+        return $this->hasMany(Resource::className(), ['secondary_language_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDocuments0()
+    public function getResources0()
     {
-        return $this->hasMany(Document::className(), ['secondary_language_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTeachings()
-    {
-        return $this->hasMany(Teaching::className(), ['primary_language_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTeachings0()
-    {
-        return $this->hasMany(Teaching::className(), ['secondary_language_id' => 'id']);
+        return $this->hasMany(Resource::className(), ['primary_language_id' => 'id']);
     }
 }

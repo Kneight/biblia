@@ -32,8 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'pt_title',
             // 'url:url',
             // 'teacher_id',
-            // 'copyright_id',
             // 'length',
+            // 'organization_id',
+            // 'hit_counter',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

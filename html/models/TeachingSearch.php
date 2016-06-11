@@ -18,7 +18,7 @@ class TeachingSearch extends Teaching
     public function rules()
     {
         return [
-            [['id', 'primary_language_id', 'secondary_language_id', 'teacher_id', 'copyright_id'], 'integer'],
+            [['id', 'primary_language_id', 'secondary_language_id', 'teacher_id', 'organization_id', 'hit_counter'], 'integer'],
             [['en_title', 'pt_title', 'url', 'length'], 'safe'],
         ];
     }
@@ -60,7 +60,8 @@ class TeachingSearch extends Teaching
             'primary_language_id' => $this->primary_language_id,
             'secondary_language_id' => $this->secondary_language_id,
             'teacher_id' => $this->teacher_id,
-            'copyright_id' => $this->copyright_id,
+            'organization_id' => $this->organization_id,
+            'hit_counter' => $this->hit_counter,
         ]);
 
         $query->andFilterWhere(['like', 'en_title', $this->en_title])

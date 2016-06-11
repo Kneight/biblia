@@ -19,7 +19,7 @@ class LanguageSearch extends Language
     {
         return [
             [['id'], 'integer'],
-            [['name', 'code', 'dam_ot', 'dam_nt'], 'safe'],
+            [['name', 'code', 'id_ot', 'id_nt'], 'safe'],
         ];
     }
 
@@ -61,8 +61,8 @@ class LanguageSearch extends Language
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'code', $this->code])
-            ->andFilterWhere(['like', 'dam_ot', $this->dam_ot])
-            ->andFilterWhere(['like', 'dam_nt', $this->dam_nt]);
+            ->andFilterWhere(['like', 'id_ot', $this->id_ot])
+            ->andFilterWhere(['like', 'id_nt', $this->id_nt]);
 
         return $dataProvider;
     }

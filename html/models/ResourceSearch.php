@@ -18,8 +18,8 @@ class ResourceSearch extends Resource
     public function rules()
     {
         return [
-            [['id', 'resource_type_id', 'resource_source_id'], 'integer'],
-            [['resource_col'], 'safe'],
+            [['id', 'resource_type_id', 'resource_source_id', 'organization_id', 'hit_counter', 'teacher_id', 'primary_language_id', 'secondary_language_id'], 'integer'],
+            [['en_name', 'pt_name', 'en_description', 'pt_description', 'resource_url'], 'safe'],
         ];
     }
 
@@ -59,9 +59,18 @@ class ResourceSearch extends Resource
             'id' => $this->id,
             'resource_type_id' => $this->resource_type_id,
             'resource_source_id' => $this->resource_source_id,
+            'organization_id' => $this->organization_id,
+            'hit_counter' => $this->hit_counter,
+            'teacher_id' => $this->teacher_id,
+            'primary_language_id' => $this->primary_language_id,
+            'secondary_language_id' => $this->secondary_language_id,
         ]);
 
-        $query->andFilterWhere(['like', 'resource_col', $this->resource_col]);
+        $query->andFilterWhere(['like', 'en_name', $this->en_name])
+            ->andFilterWhere(['like', 'pt_name', $this->pt_name])
+            ->andFilterWhere(['like', 'en_description', $this->en_description])
+            ->andFilterWhere(['like', 'pt_description', $this->pt_description])
+            ->andFilterWhere(['like', 'resource_url', $this->resource_url]);
 
         return $dataProvider;
     }

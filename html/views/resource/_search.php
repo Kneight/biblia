@@ -21,7 +21,25 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'resource_source_id') ?>
 
-    <?= $form->field($model, 'resource_col') ?>
+    <?= $form->field($model, 'organization_id') ?>
+
+    <?= $form->field($model, 'hit_counter') ?>
+
+    <?php // echo $form->field($model, 'teacher_id') ?>
+
+    <?php // echo $form->field($model, 'primary_language_id') ?>
+
+    <?php // echo $form->field($model, 'secondary_language_id') ?>
+
+    <?php // echo $form->field($model, 'en_name') ?>
+
+    <?php // echo $form->field($model, 'pt_name') ?>
+
+    <?php // echo $form->field($model, 'en_description') ?>
+
+    <?php // echo $form->field($model, 'pt_description') ?>
+
+    <?php // echo $form->field($model, 'resource_url') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

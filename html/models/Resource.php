@@ -10,10 +10,20 @@ use Yii;
  * @property integer $id
  * @property integer $resource_type_id
  * @property integer $resource_source_id
- * @property string $resource_col
+ * @property integer $organization_id
+ * @property integer $hit_counter
+ * @property integer $teacher_id
+ * @property integer $primary_language_id
+ * @property integer $secondary_language_id
+ * @property string $en_name
+ * @property string $pt_name
+ * @property string $en_description
+ * @property string $pt_description
+ * @property string $resource_url
  *
- * @property ResourceSource $resourceSource
- * @property ResourceType $resourceType
+ * @property Language $secondaryLanguage
+ * @property Organization $organization
+ * @property Language $primaryLanguage
  */
 class Resource extends \yii\db\ActiveRecord
 {
@@ -31,9 +41,11 @@ class Resource extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['resource_type_id', 'resource_source_id', 'resource_col'], 'required'],
-            [['resource_type_id', 'resource_source_id'], 'integer'],
-            [['resource_col'], 'string', 'max' => 45]
+            [['resource_type_id', 'resource_source_id', 'organization_id', 'primary_language_id', 'en_name', 'pt_name', 'resource_url'], 'required'],
+            [['resource_type_id', 'resource_source_id', 'organization_id', 'hit_counter', 'teacher_id', 'primary_language_id', 'secondary_language_id'], 'integer'],
+            [['en_description', 'pt_description'], 'string'],
+            [['en_name', 'pt_name'], 'string', 'max' => 45],
+            [['resource_url'], 'string', 'max' => 255]
         ];
     }
 
@@ -46,23 +58,40 @@ class Resource extends \yii\db\ActiveRecord
             'id' => 'ID',
             'resource_type_id' => 'Resource Type ID',
             'resource_source_id' => 'Resource Source ID',
-            'resource_col' => 'Resource Col',
+            'organization_id' => 'Organization ID',
+            'hit_counter' => 'Hit Counter',
+            'teacher_id' => 'Teacher ID',
+            'primary_language_id' => 'Primary Language ID',
+            'secondary_language_id' => 'Secondary Language ID',
+            'en_name' => 'En Name',
+            'pt_name' => 'Pt Name',
+            'en_description' => 'En Description',
+            'pt_description' => 'Pt Description',
+            'resource_url' => 'Resource Url',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getResourceSource()
+    public function getSecondaryLanguage()
     {
-        return $this->hasOne(ResourceSource::className(), ['id' => 'resource_source_id']);
+        return $this->hasOne(Language::className(), ['id' => 'secondary_language_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getResourceType()
+    public function getOrganization()
     {
-        return $this->hasOne(ResourceType::className(), ['id' => 'resource_type_id']);
+        return $this->hasOne(Organization::className(), ['id' => 'organization_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPrimaryLanguage()
+    {
+        return $this->hasOne(Language::className(), ['id' => 'primary_language_id']);
     }
 }

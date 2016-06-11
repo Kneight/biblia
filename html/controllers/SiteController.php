@@ -91,4 +91,15 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    /**
+     * Put in new resource controller
+     * Output JSON array,
+     * Needs to take Organization and language
+     */
+    protected function actionApi( $language = 'pt', $organization = array(), $options = array() )
+    {
+        $searchModel = new ResourceSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    }
 }

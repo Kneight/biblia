@@ -31,7 +31,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'resource_type_id',
             'resource_source_id',
-            'resource_col',
+            'organization_id',
+            'hit_counter',
+            'teacher_id',
+            'primary_language_id',
+            'secondary_language_id',
+            'en_name',
+            'pt_name',
+            'en_description:ntext',
+            'pt_description:ntext',
+            'resource_url:url',
         ],
     ]) ?>
 

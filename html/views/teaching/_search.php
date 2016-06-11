@@ -29,9 +29,11 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'teacher_id') ?>
 
-    <?php // echo $form->field($model, 'copyright_id') ?>
-
     <?php // echo $form->field($model, 'length') ?>
+
+    <?php // echo $form->field($model, 'organization_id') ?>
+
+    <?php // echo $form->field($model, 'hit_counter') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

@@ -14,13 +14,11 @@ use Yii;
  * @property string $pt_title
  * @property string $url
  * @property integer $teacher_id
- * @property integer $copyright_id
  * @property string $length
+ * @property integer $organization_id
+ * @property integer $hit_counter
  *
- * @property Copyright $copyright
- * @property Language $primaryLanguage
- * @property Language $secondaryLanguage
- * @property Teacher $teacher
+ * @property Organization $organization
  */
 class Teaching extends \yii\db\ActiveRecord
 {
@@ -38,8 +36,8 @@ class Teaching extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['primary_language_id', 'en_title', 'pt_title', 'url', 'teacher_id', 'copyright_id'], 'required'],
-            [['primary_language_id', 'secondary_language_id', 'teacher_id', 'copyright_id'], 'integer'],
+            [['primary_language_id', 'en_title', 'pt_title', 'url', 'teacher_id', 'organization_id'], 'required'],
+            [['primary_language_id', 'secondary_language_id', 'teacher_id', 'organization_id', 'hit_counter'], 'integer'],
             [['en_title', 'pt_title'], 'string', 'max' => 155],
             [['url'], 'string', 'max' => 255],
             [['length'], 'string', 'max' => 45]
@@ -59,40 +57,17 @@ class Teaching extends \yii\db\ActiveRecord
             'pt_title' => 'Pt Title',
             'url' => 'Url',
             'teacher_id' => 'Teacher ID',
-            'copyright_id' => 'Copyright ID',
             'length' => 'Length',
+            'organization_id' => 'Organization ID',
+            'hit_counter' => 'Hit Counter',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCopyright()
+    public function getOrganization()
     {
-        return $this->hasOne(Copyright::className(), ['id' => 'copyright_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPrimaryLanguage()
-    {
-        return $this->hasOne(Language::className(), ['id' => 'primary_language_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSecondaryLanguage()
-    {
-        return $this->hasOne(Language::className(), ['id' => 'secondary_language_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTeacher()
-    {
-        return $this->hasOne(Teacher::className(), ['id' => 'teacher_id']);
+        return $this->hasOne(Organization::className(), ['id' => 'organization_id']);
     }
 }

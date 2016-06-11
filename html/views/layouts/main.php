@@ -35,12 +35,9 @@ AppAsset::register($this);
     ]);
     $menu = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        [ 'label' => 'Copyrights',          'url' => '/copyright/index' ],
-        [ 'label' => 'Documents',           'url' => '/document/index' ],
         [ 'label' => 'Languages',           'url' => '/language/index' ],
         [ 'label' => 'Organizations',       'url' => '/organization/index' ],
         [ 'label' => 'Resources',           'url' => '/resource/index' ],
-        [ 'label' => 'Resource Sources',    'url' => '/resource-source/index' ],
         [ 'label' => 'Resource Types',      'url' => '/resource-type/index' ],
         [ 'label' => 'Teachers',            'url' => '/teacher/index' ],
         [ 'label' => 'Teachings',           'url' => '/teaching/index' ],
