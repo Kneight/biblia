@@ -31,6 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'pt_name',
             'pt_description',
             // 'photo',
+            // 'license',
+            // 'title',
+            // 'year',
+            // 'group',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

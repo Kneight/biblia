@@ -19,8 +19,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'resource_type_id') ?>
 
-    <?= $form->field($model, 'resource_source_id') ?>
-
     <?= $form->field($model, 'organization_id') ?>
 
     <?= $form->field($model, 'hit_counter') ?>

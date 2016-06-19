@@ -67,6 +67,7 @@ class m160430_191205_add_copyright_to_organization extends Migration
         $this->addColumn( 'resource', 'resource_url', 'varchar(255) NOT NULL' );
 
         $this->dropTable( 'document' );
+        $this->dropForeignKey( 'resource_resource_source_id_resource_source_id', 'resource', 'resource_source_id', 'resource_source', 'id');
         $this->dropTable( 'resource_source' );
 
         $this->addForeignKey( 'resource_primary_language_id_language_id', 'resource', 'primary_language_id', 'language', 'id' );

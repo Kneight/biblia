@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Teaching */
@@ -12,9 +13,10 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'primary_language_id')->textInput() ?>
+    <?php $languageArray = ArrayHelper::map(\app\models\Language::find()->orderBy('name')->all(), 'id', 'name') ?>
+    <?= $form->field($model, 'primary_language_id')->dropDownList($languageArray, ['prompt' => '---- Select Language ----'])->label('Primary Language') ?>
 
-    <?= $form->field($model, 'secondary_language_id')->textInput() ?>
+    <?= $form->field($model, 'secondary_language_id')->dropDownList($languageArray, ['prompt' => '---- Select Language ----'])->label('Secondary Language') ?>
 
     <?= $form->field($model, 'en_title')->textInput(['maxlength' => true]) ?>
 
@@ -22,13 +24,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'teacher_id')->textInput() ?>
+    <?php $organizationArray = ArrayHelper::map(\app\models\Organization::find()->orderBy('en_name')->all(), 'id', 'en_name') ?>
+    <?= $form->field($model, 'organization_id')->dropDownList($organizationArray, ['prompt' => '---- Select Organization ----'])->label('Organization') ?>
+
+    <?php $teacherArray = ArrayHelper::map(\app\models\Teacher::find()->orderBy('organization_id, en_name')->all(), 'id', 'en_name', 'organization.en_name') ?>
+    <?= $form->field($model, 'teacher_id')->dropDownList($teacherArray, ['prompt' => '---- Select Teacher ----'])->label('Teacher') ?>
 
     <?= $form->field($model, 'length')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'organization_id')->textInput() ?>
-
-    <?= $form->field($model, 'hit_counter')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

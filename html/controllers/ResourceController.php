@@ -8,6 +8,7 @@ use app\models\ResourceSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ResourceController implements the CRUD actions for Resource model.
@@ -62,7 +63,13 @@ class ResourceController extends Controller
     {
         $model = new Resource();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $result = $model->load(Yii::$app->request->post());
+
+        $model->file_upload = UploadedFile::getInstance($model, 'file_upload');
+        if( $result && isset( $_FILES ) )
+            $result = $result && $model->upload();
+
+        if ( $result ) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -117,5 +124,16 @@ class ResourceController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    /**
+     * Put in new resource controller
+     * Output JSON array,
+     * Needs to take Organization and language
+     */
+    protected function actionApi( $language = 'pt', $organization = array(), $options = array() )
+    {
+        $searchModel = new ResourceSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
     }
 }

@@ -18,7 +18,7 @@ class ResourceSearch extends Resource
     public function rules()
     {
         return [
-            [['id', 'resource_type_id', 'resource_source_id', 'organization_id', 'hit_counter', 'teacher_id', 'primary_language_id', 'secondary_language_id'], 'integer'],
+            [['id', 'resource_type_id', 'organization_id', 'hit_counter', 'teacher_id', 'primary_language_id', 'secondary_language_id'], 'integer'],
             [['en_name', 'pt_name', 'en_description', 'pt_description', 'resource_url'], 'safe'],
         ];
     }
@@ -58,7 +58,6 @@ class ResourceSearch extends Resource
         $query->andFilterWhere([
             'id' => $this->id,
             'resource_type_id' => $this->resource_type_id,
-            'resource_source_id' => $this->resource_source_id,
             'organization_id' => $this->organization_id,
             'hit_counter' => $this->hit_counter,
             'teacher_id' => $this->teacher_id,

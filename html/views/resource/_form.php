@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Resource */
@@ -10,21 +11,21 @@ use yii\widgets\ActiveForm;
 
 <div class="resource-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'resource_type_id')->textInput() ?>
+    <?php $typeArray = ArrayHelper::map(\app\models\ResourceType::find()->orderBy('name')->all(), 'id', 'name') ?>
+    <?= $form->field($model, 'resource_type_id')->dropDownList($typeArray, ['prompt' => '---- Select Resource Type ----'])->label('Resource Type') ?>
 
-    <?= $form->field($model, 'resource_source_id')->textInput() ?>
+    <?php $organizationArray = ArrayHelper::map(\app\models\Organization::find()->orderBy('en_name')->all(), 'id', 'en_name') ?>
+    <?= $form->field($model, 'organization_id')->dropDownList($organizationArray, ['prompt' => '---- Select Organization ----'])->label('Organization') ?>
 
-    <?= $form->field($model, 'organization_id')->textInput() ?>
+    <?php $teacherArray = ArrayHelper::map(\app\models\Teacher::find()->orderBy('en_name')->all(), 'id', 'en_name', 'organization.en_name') ?>
+    <?= $form->field($model, 'teacher_id')->dropDownList($teacherArray, ['prompt' => '---- Select Teacher ----'])->label('Teacher') ?>
 
-    <?= $form->field($model, 'hit_counter')->textInput() ?>
+    <?php $languageArray = ArrayHelper::map(\app\models\Language::find()->orderBy('name')->all(), 'id', 'name') ?>
+    <?= $form->field($model, 'primary_language_id')->dropDownList($languageArray, ['prompt' => '---- Select Language ----'])->label('Primary Language') ?>
 
-    <?= $form->field($model, 'teacher_id')->textInput() ?>
-
-    <?= $form->field($model, 'primary_language_id')->textInput() ?>
-
-    <?= $form->field($model, 'secondary_language_id')->textInput() ?>
+    <?= $form->field($model, 'secondary_language_id')->dropDownList($languageArray, ['prompt' => '---- Select Language ----'])->label('Secondary Language') ?>
 
     <?= $form->field($model, 'en_name')->textInput(['maxlength' => true]) ?>
 
@@ -34,6 +35,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'pt_description')->textarea(['rows' => 6]) ?>
 
+    <?= $form->field($model, 'file_upload')->fileInput() ?>
     <?= $form->field($model, 'resource_url')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
