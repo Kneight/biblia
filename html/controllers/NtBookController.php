@@ -77,6 +77,7 @@ class NtBookController extends Controller
     {
         $searchModel = new NtBookSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams); //we want it all
+        $dataProvider->pagination = false;
         $results = $dataProvider->getModels();
         $output = array();
         foreach( $results as $model )

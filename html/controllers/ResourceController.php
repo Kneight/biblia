@@ -126,14 +126,50 @@ class ResourceController extends Controller
         }
     }
 
+
     /**
      * Put in new resource controller
      * Output JSON array,
      * Needs to take Organization and language
      */
-    protected function actionApi( $language = 'pt', $organization = array(), $options = array() )
+    public function actionApi( $language = 'pt', $organization = array(), $options = array() )
     {
         $searchModel = new ResourceSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams); //we want it all
+        $dataProvider->setPagination( [ 'pageSize' => 1000 ] );
+        $results = $dataProvider->getModels();
+        $output = array();
+        foreach( $results as $model )
+        {
+            /* @var app/models/Resource $model
+             * @property integer $id
+             * @property integer $resource_type_id
+             * @property integer $organization_id
+             * @property integer $hit_counter
+             * @property integer $teacher_id
+             * @property integer $primary_language_id
+             * @property integer $secondary_language_id
+             * @property string $en_name
+             * @property string $pt_name
+             * @property string $en_description
+             * @property string $pt_description
+             * @property string $resource_url
+             */
+            $output[] = [
+                'id'                    => $model->getAttribute( 'id' ),
+                'resource_type'         => !is_null($model->resourceType->name) ? $model->resourceType->name : '',
+                'organization_id'       => $model->getAttribute( 'organization_id' ),
+                'teacher_id'            => $model->getAttribute( 'teacher_id' ),
+                'primary_language_id'   => $model->getAttribute( 'primary_language_id' ),
+                'secondary_language_id' => $model->getAttribute( 'secondary_language_id' ),
+                'en_name'               => $model->getAttribute( 'en_name' ),
+                'pt_name'               => $model->getAttribute( 'pt_name' ),
+                'en_description'        => $model->getAttribute( 'en_description' ),
+                'pt_description'        => $model->getAttribute( 'pt_description' ),
+                'resource_url'          => $model->getAttribute( 'resource_url' ),
+                'hit_counter'           => $model->getAttribute( 'hit_counter' ),
+            ];
+        }
+        echo json_encode( $output, JSON_UNESCAPED_UNICODE );
     }
 }

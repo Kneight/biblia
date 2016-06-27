@@ -24,6 +24,7 @@ use yii\helpers\BaseUrl;
  *
  * @property UploadedFile $file_upload
  *
+ * @property ResourceType $resourceType
  * @property Language $secondaryLanguage
  * @property Organization $organization
  * @property Language $primaryLanguage
@@ -51,7 +52,7 @@ class Resource extends \yii\db\ActiveRecord
             [['en_description', 'pt_description'], 'string'],
             [['en_name', 'pt_name'], 'string', 'max' => 45],
             [['resource_url'], 'string', 'max' => 255],
-            [['file_upload'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf, mp3, mp4, jpg']
+            [['file_upload'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf, txt, rtf']
         ];
     }
 
@@ -119,5 +120,13 @@ class Resource extends \yii\db\ActiveRecord
     public function getPrimaryLanguage()
     {
         return $this->hasOne(Language::className(), ['id' => 'primary_language_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getResourceType()
+    {
+        return $this->hasOne(ResourceType::className(), ['id' => 'resource_type_id']);
     }
 }

@@ -34,15 +34,15 @@ AppAsset::register($this);
         ],
     ]);
     $menu = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        [ 'label' => 'Languages',           'url' => '/language/index' ],
-        [ 'label' => 'Organizations',       'url' => '/organization/index' ],
-        [ 'label' => 'Resources',           'url' => '/resource/index' ],
-        [ 'label' => 'Resource Types',      'url' => '/resource-type/index' ],
-        [ 'label' => 'Teachers',            'url' => '/teacher/index' ],
-        [ 'label' => 'Teachings',           'url' => '/teaching/index' ],
-        [ 'label' => 'OT Books',            'url' => '/ot-book/index' ],
-        [ 'label' => 'NT Books',            'url' => '/nt-book/index' ],
+        [ 'label' => 'Home',                'url' => ['/site/index']],
+        [ 'label' => 'Languages',           'url' => ['/language/index'] ],
+        [ 'label' => 'Organizations',       'url' => ['/organization/index'] ],
+        [ 'label' => 'Resources',           'url' => ['/resource/index'] ],
+        [ 'label' => 'Resource Types',      'url' => ['/resource-type/index'] ],
+        [ 'label' => 'Teachers',            'url' => ['/teacher/index'] ],
+        [ 'label' => 'Teachings',           'url' => ['/teaching/index'] ],
+        [ 'label' => 'OT Books',            'url' => ['/ot-book/index'] ],
+        [ 'label' => 'NT Books',            'url' => ['/nt-book/index'] ],
         Yii::$app->user->isGuest ? (
         ['label' => 'Login', 'url' => ['/site/login']]
         ) : (

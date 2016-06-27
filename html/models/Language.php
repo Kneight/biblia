@@ -44,8 +44,8 @@ class Language extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'code' => 'Code',
+            'name' => 'En Name',
+            'code' => 'Pt Name',
             'id_ot' => 'Id Ot',
             'id_nt' => 'Id Nt',
         ];
