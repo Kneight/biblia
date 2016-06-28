@@ -12,6 +12,8 @@ use app\models\Teacher;
  */
 class TeacherSearch extends Teacher
 {
+    public $organizationName;
+
     /**
      * @inheritdoc
      */
@@ -19,7 +21,7 @@ class TeacherSearch extends Teacher
     {
         return [
             [['id', 'organization_id'], 'integer'],
-            [['en_name', 'en_description', 'pt_name', 'pt_description', 'location', 'photo'], 'safe'],
+            [['en_name', 'en_description', 'pt_name', 'pt_description', 'location', 'photo', 'organizationName'], 'safe'],
         ];
     }
 
@@ -47,11 +49,25 @@ class TeacherSearch extends Teacher
             'query' => $query,
         ]);
 
+        $dataProvider->setSort( [
+            'attributes' => [
+                'id',
+                'en_name',
+                'en_description',
+                'organizationName' => [
+                    'asc' => ['organization.en_name' => SORT_ASC],
+                    'desc' => ['organization.en_name' => SORT_DESC],
+                    'label' => 'Organization',
+                ],
+            ],
+        ] );
+
         $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
+            $query->joinWith( ['organization'] );
             return $dataProvider;
         }
 
@@ -66,6 +82,11 @@ class TeacherSearch extends Teacher
             ->andFilterWhere(['like', 'pt_description', $this->pt_description])
             ->andFilterWhere(['like', 'location', $this->location])
             ->andFilterWhere(['like', 'photo', $this->photo]);
+
+        // filter by organization Name
+        $query->joinWith(['organization' => function ($q) {
+            $q->where('organization.en_name LIKE "%' . $this->organizationName . '%"');
+        }]);
 
         return $dataProvider;
     }

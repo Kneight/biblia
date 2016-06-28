@@ -56,6 +56,7 @@ class Teacher extends \yii\db\ActiveRecord
             'location' => 'Location',
             'photo' => 'Photo',
             'organization_id' => 'Organization ID',
+            'organizationName' => 'Organization',
         ];
     }
 
@@ -65,6 +66,11 @@ class Teacher extends \yii\db\ActiveRecord
     public function getOrganization()
     {
         return $this->hasOne(Organization::className(), ['id' => 'organization_id']);
+    }
+
+    public function getOrganizationName()
+    {
+        return $this->organization->en_name;
     }
 
     /**
