@@ -22,6 +22,10 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'pt_title')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'en_description')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'pt_description')->textarea(['rows' => 6]) ?>
+
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
     <?php $organizationArray = ArrayHelper::map(\app\models\Organization::find()->orderBy('en_name')->all(), 'id', 'en_name') ?>

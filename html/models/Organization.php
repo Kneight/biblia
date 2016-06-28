@@ -40,7 +40,8 @@ class Organization extends \yii\db\ActiveRecord
             [['en_name', 'en_description', 'pt_name', 'pt_description', 'photo', 'license_type_id'], 'required'],
             [['year'], 'integer'],
             [['en_name', 'pt_name', 'photo'], 'string', 'max' => 155],
-            [['en_description', 'pt_description', 'license_type_id', 'title', 'group'], 'string', 'max' => 255]
+            [['en_description', 'pt_description'], 'string'],
+            [['license_type_id', 'title', 'group'], 'string', 'max' => 255],
         ];
     }
 

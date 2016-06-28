@@ -12,6 +12,8 @@ use Yii;
  * @property integer $secondary_language_id
  * @property string $en_title
  * @property string $pt_title
+ * * @property string $en_description
+ * * @property string $pt_description
  * @property string $url
  * @property integer $teacher_id
  * @property string $length
@@ -41,6 +43,7 @@ class Teaching extends \yii\db\ActiveRecord
             [['primary_language_id', 'secondary_language_id', 'teacher_id', 'organization_id', 'hit_counter'], 'integer'],
             [['en_title', 'pt_title'], 'string', 'max' => 155],
             [['url'], 'string', 'max' => 255],
+            [['en_description', 'pt_description'], 'string'],
             [['length'], 'string', 'max' => 45]
         ];
     }
@@ -63,6 +66,8 @@ class Teaching extends \yii\db\ActiveRecord
             'hit_counter' => 'Hit Counter',
             'organizationName' => 'Organization',
             'teacherName' => 'Teacher',
+            'en_description' => 'En Description',
+            'pt_description' => 'Pt Description',
         ];
     }
 

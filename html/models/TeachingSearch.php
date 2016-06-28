@@ -23,7 +23,7 @@ class TeachingSearch extends Teaching
     {
         return [
             [['id', 'primary_language_id', 'secondary_language_id', 'teacher_id', 'organization_id', 'hit_counter'], 'integer'],
-            [['en_title', 'pt_title', 'url', 'length', 'organizationName', 'teacherName'], 'safe'],
+            [['en_title', 'pt_title', 'url', 'length', 'organizationName', 'teacherName', 'en_description', 'pt_description'], 'safe'],
         ];
     }
 
@@ -90,6 +90,8 @@ class TeachingSearch extends Teaching
         $query->andFilterWhere(['like', 'en_title', $this->en_title])
             ->andFilterWhere(['like', 'pt_title', $this->pt_title])
             ->andFilterWhere(['like', 'url', $this->url])
+            ->andFilterWhere(['like', 'en_description', $this->en_description])
+            ->andFilterWhere(['like', 'pt_description', $this->pt_description])
             ->andFilterWhere(['like', 'length', $this->length]);
 
         // filter by TeacherName

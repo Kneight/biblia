@@ -38,7 +38,8 @@ class Teacher extends \yii\db\ActiveRecord
             [['en_name', 'en_description', 'pt_name', 'pt_description', 'location', 'photo', 'organization_id'], 'required'],
             [['organization_id'], 'integer'],
             [['en_name', 'pt_name', 'location'], 'string', 'max' => 100],
-            [['en_description', 'pt_description', 'photo'], 'string', 'max' => 255]
+            [['en_description', 'pt_description'], 'string'],
+            [['photo'], 'string', 'max' => 255]
         ];
     }
 
