@@ -12,6 +12,10 @@ use app\models\Teaching;
  */
 class TeachingSearch extends Teaching
 {
+
+    public $organizationName;
+    public $teacherName;
+
     /**
      * @inheritdoc
      */
@@ -19,7 +23,7 @@ class TeachingSearch extends Teaching
     {
         return [
             [['id', 'primary_language_id', 'secondary_language_id', 'teacher_id', 'organization_id', 'hit_counter'], 'integer'],
-            [['en_title', 'pt_title', 'url', 'length'], 'safe'],
+            [['en_title', 'pt_title', 'url', 'length', 'organizationName', 'teacherName'], 'safe'],
         ];
     }
 
@@ -47,6 +51,25 @@ class TeachingSearch extends Teaching
             'query' => $query,
         ]);
 
+        $dataProvider->setSort( [
+            'attributes' => [
+                'id',
+                'en_title',
+                'hit_counter',
+                'length',
+                'organizationName' => [
+                    'asc' => ['organization.en_name' => SORT_ASC],
+                    'desc' => ['organization.en_name' => SORT_DESC],
+                    'label' => 'Organization',
+                ],
+                'teacherName' => [
+                    'asc' => ['teacher.en_name' => SORT_ASC],
+                    'desc' => ['teacher.en_name' => SORT_DESC],
+                    'label' => 'Teacher',
+                ],
+            ],
+        ] );
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -68,6 +91,17 @@ class TeachingSearch extends Teaching
             ->andFilterWhere(['like', 'pt_title', $this->pt_title])
             ->andFilterWhere(['like', 'url', $this->url])
             ->andFilterWhere(['like', 'length', $this->length]);
+
+        // filter by TeacherName
+        $query->joinWith(['teacher' => function ($q) {
+            $q->where('teacher.en_name LIKE "%' . $this->teacherName . '%"');
+        }]);
+
+        // filter by organizationName
+        $query->joinWith(['organization' => function ($q) {
+            $q->where('organization.en_name LIKE "%' . $this->organizationName . '%"');
+        }]);
+
 
         return $dataProvider;
     }

@@ -19,6 +19,7 @@ use Yii;
  * @property integer $hit_counter
  *
  * @property Organization $organization
+ * @property Teacher $teacher
  */
 class Teaching extends \yii\db\ActiveRecord
 {
@@ -60,6 +61,8 @@ class Teaching extends \yii\db\ActiveRecord
             'length' => 'Length',
             'organization_id' => 'Organization ID',
             'hit_counter' => 'Hit Counter',
+            'organizationName' => 'Organization',
+            'teacherName' => 'Teacher',
         ];
     }
 
@@ -69,5 +72,23 @@ class Teaching extends \yii\db\ActiveRecord
     public function getOrganization()
     {
         return $this->hasOne(Organization::className(), ['id' => 'organization_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTeacher()
+    {
+        return $this->hasOne(Teacher::className(), ['id' => 'teacher_id']);
+    }
+
+    public function getTeacherName()
+    {
+        return $this->teacher->en_name;
+    }
+
+    public function getOrganizationName()
+    {
+        return $this->organization->en_name;
     }
 }
