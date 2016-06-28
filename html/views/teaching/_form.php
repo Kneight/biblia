@@ -11,7 +11,7 @@ use yii\helpers\ArrayHelper;
 
 <div class="teaching-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?php $languageArray = ArrayHelper::map(\app\models\Language::find()->orderBy('name')->all(), 'id', 'name') ?>
     <?= $form->field($model, 'primary_language_id')->dropDownList($languageArray, ['prompt' => '---- Select Language ----'])->label('Primary Language') ?>
@@ -25,6 +25,8 @@ use yii\helpers\ArrayHelper;
     <?= $form->field($model, 'en_description')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'pt_description')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'file_upload')->fileInput() ?>
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 

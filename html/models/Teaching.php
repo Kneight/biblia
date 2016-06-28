@@ -3,6 +3,9 @@
 namespace app\models;
 
 use Yii;
+use yii\web\UploadedFile;
+use yii\helpers\BaseUrl;
+
 
 /**
  * This is the model class for table "teaching".
@@ -20,11 +23,16 @@ use Yii;
  * @property integer $organization_id
  * @property integer $hit_counter
  *
+ * @property UploadedFile $file_upload
+ *
  * @property Organization $organization
  * @property Teacher $teacher
  */
 class Teaching extends \yii\db\ActiveRecord
 {
+
+    public $file_upload;
+
     /**
      * @inheritdoc
      */
@@ -44,7 +52,8 @@ class Teaching extends \yii\db\ActiveRecord
             [['en_title', 'pt_title'], 'string', 'max' => 155],
             [['url'], 'string', 'max' => 255],
             [['en_description', 'pt_description'], 'string'],
-            [['length'], 'string', 'max' => 45]
+            [['length'], 'string', 'max' => 45],
+            [['file_upload'], 'file', 'skipOnEmpty' => true, 'extensions' => 'mp3']
         ];
     }
 
@@ -68,7 +77,28 @@ class Teaching extends \yii\db\ActiveRecord
             'teacherName' => 'Teacher',
             'en_description' => 'En Description',
             'pt_description' => 'Pt Description',
+            'file_upload' => 'File Upload (For Onsite Storage)',
         ];
+    }
+
+    /**
+     * Upload the file
+     * @return bool
+     */
+    public function upload()
+    {
+        if( !is_dir( 'uploads/' . $this->organization_id . '/Teaching' ) )
+            mkdir( 'uploads/' . $this->organization_id . '/Teaching', 0775, true );
+        $FileName = 'uploads/' . $this->organization_id . '/Teaching/' . urlencode( $this->file_upload->baseName ) . '.' . $this->file_upload->extension;
+        if( $this->file_upload )
+            $this->url = BaseUrl::toRoute( $FileName, true );
+        if ( $this->save() ) {
+            if( $this->file_upload )
+                $this->file_upload->saveAs( $FileName );
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

@@ -36,6 +36,7 @@ use yii\helpers\ArrayHelper;
     <?= $form->field($model, 'pt_description')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'file_upload')->fileInput() ?>
+
     <?= $form->field($model, 'resource_url')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">

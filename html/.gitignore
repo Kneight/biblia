@@ -1,6 +1,9 @@
 # phpstorm project files
 .idea
 
+#ignore upload files
+web/uploads/*
+
 # netbeans project files
 nbproject
 

@@ -8,6 +8,7 @@ use app\models\TeachingSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * TeachingController implements the CRUD actions for Teaching model.
@@ -62,7 +63,13 @@ class TeachingController extends Controller
     {
         $model = new Teaching();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $result = $model->load(Yii::$app->request->post());
+
+        $model->file_upload = UploadedFile::getInstance($model, 'file_upload');
+        if( $result && isset( $_FILES ) )
+            $result = $result && $model->upload();
+
+        if ( $result ) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -81,10 +88,16 @@ class TeachingController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $result = $model->load(Yii::$app->request->post());
+
+        $model->file_upload = UploadedFile::getInstance($model, 'file_upload');
+        if( $result && isset( $_FILES ) )
+            $result = $result && $model->upload();
+
+        if ( $result ) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('update', [
+            return $this->render('create', [
                 'model' => $model,
             ]);
         }

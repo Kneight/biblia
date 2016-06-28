@@ -88,10 +88,16 @@ class ResourceController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $result = $model->load(Yii::$app->request->post());
+
+        $model->file_upload = UploadedFile::getInstance($model, 'file_upload');
+        if( $result && isset( $_FILES ) )
+            $result = $result && $model->upload();
+
+        if ( $result ) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('update', [
+            return $this->render('create', [
                 'model' => $model,
             ]);
         }
