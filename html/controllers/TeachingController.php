@@ -118,4 +118,58 @@ class TeachingController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * API call to increase hit counter.  Call it on a download
+     */
+    public function actionHit( $id )
+    {
+        if (($model = Teaching::findOne($id)) !== null) {
+            $model->hit_counter ++;
+            $model->save();
+        }
+    }
+
+    /**
+     * Put in new resource controller
+     * Output JSON array,
+     * Needs to take Organization and language
+     */
+    public function actionApi( $language = 'pt', $organization = array(), $options = array() )
+    {
+        $searchModel = new TeachingSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams); //we want it all
+        $dataProvider->setPagination( [ 'pageSize' => 1000 ] );
+        $results = $dataProvider->getModels();
+        $output = array();
+        foreach( $results as $model )
+        {
+            /* @var app/models/Teaching $model
+             * @property integer $id
+             * @property integer $primary_language_id
+             * @property integer $secondary_language_id
+             * @property string $en_title
+             * @property string $pt_title
+             * @property string $url
+             * @property integer $teacher_id
+             * @property string $length
+             * @property integer $organization_id
+             * @property integer $hit_counter
+             */
+            $output[] = [
+                'id'                    => $model->getAttribute( 'id' ),
+                'primary_language_id'   => $model->getAttribute( 'primary_language_id' ),
+                'secondary_language_id' => $model->getAttribute( 'secondary_language_id' ),
+                'en_title'              => $model->getAttribute( 'en_title' ),
+                'pt_title'              => $model->getAttribute( 'pt_title' ),
+                'teaching_url'          => $model->getAttribute( 'url' ),
+                'teacher_id'            => $model->getAttribute( 'teacher_id' ),
+                'length'                => $model->getAttribute( 'length' ),
+                'organization_id'       => $model->getAttribute( 'organization_id' ),
+                'hit_counter'           => $model->getAttribute( 'hit_counter' ),
+                'created_at'            => $model->getAttribute( 'created_at' ),
+            ];
+        }
+        echo json_encode( $output, JSON_UNESCAPED_UNICODE );
+    }
 }

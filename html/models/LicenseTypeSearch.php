@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Organization;
+use app\models\LicenseType;
 
 /**
- * OrganizationSearch represents the model behind the search form about `app\models\Organization`.
+ * LicenseTypeSearch represents the model behind the search form about `app\models\LicenseType`.
  */
-class OrganizationSearch extends Organization
+class LicenseTypeSearch extends LicenseType
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class OrganizationSearch extends Organization
     public function rules()
     {
         return [
-            [['id', 'year'], 'integer'],
-            [['en_name', 'en_description', 'pt_name', 'pt_description', 'photo', 'license_type_id', 'title', 'group'], 'safe'],
+            [['id'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class OrganizationSearch extends Organization
      */
     public function search($params)
     {
-        $query = Organization::find();
+        $query = LicenseType::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -57,17 +57,9 @@ class OrganizationSearch extends Organization
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'year' => $this->year,
-            'license_type_id', $this->license_type_id,
         ]);
 
-        $query->andFilterWhere(['like', 'en_name', $this->en_name])
-            ->andFilterWhere(['like', 'en_description', $this->en_description])
-            ->andFilterWhere(['like', 'pt_name', $this->pt_name])
-            ->andFilterWhere(['like', 'pt_description', $this->pt_description])
-            ->andFilterWhere(['like', 'photo', $this->photo])
-            ->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'group', $this->group]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

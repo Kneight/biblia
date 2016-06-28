@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ResourceSearch */
@@ -23,16 +24,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
+//            ['class' => 'yii\grid\SerialColumn'],
             'id',
-            'resource_type_id',
-            'organization_id',
+            'en_name',
             'hit_counter',
-            // 'teacher_id',
+            'resourceTypeName',
+            'organizationName',
+            'teacherName',
             // 'primary_language_id',
             // 'secondary_language_id',
-            // 'en_name',
             // 'pt_name',
             // 'en_description:ntext',
             // 'pt_description:ntext',

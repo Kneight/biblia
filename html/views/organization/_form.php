@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Organization */
@@ -22,7 +23,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'license')->textInput(['maxlength' => true]) ?>
+    <?php $licenseArray = ArrayHelper::map(\app\models\LicenseType::find()->orderBy('name')->all(), 'id', 'name') ?>
+    <?= $form->field($model, 'license_type_id')->dropDownList($licenseArray, ['prompt' => '---- Select License Type ----'])->label('License Type') ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 

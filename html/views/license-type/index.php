@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\OrganizationSearch */
+/* @var $searchModel app\models\LicenseTypeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Organizations';
+$this->title = 'License Types';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="organization-index">
+<div class="license-type-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Organization', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create License Type', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,15 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'en_name',
-            'en_description',
-            'pt_name',
-            'pt_description',
-            // 'photo',
-            // 'license_type_id',
-            // 'title',
-            // 'year',
-            // 'group',
+            'name',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

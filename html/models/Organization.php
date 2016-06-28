@@ -13,7 +13,7 @@ use Yii;
  * @property string $pt_name
  * @property string $pt_description
  * @property string $photo
- * @property string $license
+ * @property string $license_type_id
  * @property string $title
  * @property integer $year
  * @property string $group
@@ -37,10 +37,10 @@ class Organization extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['en_name', 'en_description', 'pt_name', 'pt_description', 'photo', 'license'], 'required'],
+            [['en_name', 'en_description', 'pt_name', 'pt_description', 'photo', 'license_type_id'], 'required'],
             [['year'], 'integer'],
             [['en_name', 'pt_name', 'photo'], 'string', 'max' => 155],
-            [['en_description', 'pt_description', 'license', 'title', 'group'], 'string', 'max' => 255]
+            [['en_description', 'pt_description', 'license_type_id', 'title', 'group'], 'string', 'max' => 255]
         ];
     }
 
@@ -56,7 +56,7 @@ class Organization extends \yii\db\ActiveRecord
             'pt_name' => 'Pt Name',
             'pt_description' => 'Pt Description',
             'photo' => 'Photo',
-            'license' => 'License',
+            'license_type_id' => 'License Type',
             'title' => 'Title',
             'year' => 'Year',
             'group' => 'Group',

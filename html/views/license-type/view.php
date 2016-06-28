@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Organization */
+/* @var $model app\models\LicenseType */
 
-$this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Organizations', 'url' => ['index']];
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'License Types', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="organization-view">
+<div class="license-type-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,15 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'en_name',
-            'en_description',
-            'pt_name',
-            'pt_description',
-            'photo',
-            'license_type_id',
-            'title',
-            'year',
-            'group',
+            'name',
         ],
     ]) ?>
 

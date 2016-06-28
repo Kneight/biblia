@@ -31,6 +31,9 @@ use yii\helpers\BaseUrl;
  */
 class Resource extends \yii\db\ActiveRecord
 {
+    /**
+     * Calculated fields
+     */
     public $file_upload;
 
     /**
@@ -64,9 +67,12 @@ class Resource extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'resource_type_id' => 'Resource Type ID',
+            'resourceTypeName' => 'Type',
             'organization_id' => 'Organization ID',
+            'organizationName' => 'Organization',
             'hit_counter' => 'Hit Counter',
             'teacher_id' => 'Teacher ID',
+            'teacherName' => 'Teacher',
             'primary_language_id' => 'Primary Language ID',
             'secondary_language_id' => 'Secondary Language ID',
             'en_name' => 'En Name',
@@ -117,6 +123,14 @@ class Resource extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getTeacher()
+    {
+        return $this->hasOne(Teacher::className(), ['id' => 'teacher_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getPrimaryLanguage()
     {
         return $this->hasOne(Language::className(), ['id' => 'primary_language_id']);
@@ -128,5 +142,20 @@ class Resource extends \yii\db\ActiveRecord
     public function getResourceType()
     {
         return $this->hasOne(ResourceType::className(), ['id' => 'resource_type_id']);
+    }
+
+    /* Getter for resource type name */
+    public function getResourceTypeName() {
+        return $this->resourceType->name;
+    }
+
+    /* Getter for organization name */
+    public function getOrganizationName() {
+        return $this->organization->en_name;
+    }
+
+    /* Getter for teacher name */
+    public function getTeacherName() {
+        return $this->teacher->en_name;
     }
 }

@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'photo') ?>
 
-    <?php // echo $form->field($model, 'license') ?>
+    <?php // echo $form->field($model, 'license_type_id') ?>
 
     <?php // echo $form->field($model, 'title') ?>
 

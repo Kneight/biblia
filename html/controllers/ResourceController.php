@@ -126,6 +126,16 @@ class ResourceController extends Controller
         }
     }
 
+    /**
+     * API call to increase hit counter.  Call it on a download
+     */
+    public function actionHit( $id )
+    {
+        if (($model = Resource::findOne($id)) !== null) {
+            $model->hit_counter ++;
+            $model->save();
+        }
+    }
 
     /**
      * Put in new resource controller
@@ -168,6 +178,7 @@ class ResourceController extends Controller
                 'pt_description'        => $model->getAttribute( 'pt_description' ),
                 'resource_url'          => $model->getAttribute( 'resource_url' ),
                 'hit_counter'           => $model->getAttribute( 'hit_counter' ),
+                'created_at'            => $model->getAttribute( 'created_at' ),
             ];
         }
         echo json_encode( $output, JSON_UNESCAPED_UNICODE );
