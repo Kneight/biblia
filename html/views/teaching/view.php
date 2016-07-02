@@ -33,8 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'secondary_language_id',
             'en_title',
             'pt_title',
-            'en_description',
-            'pt_description',
             'url:url',
             'teacher_id',
             'length',

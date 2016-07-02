@@ -23,7 +23,7 @@ class TeachingSearch extends Teaching
     {
         return [
             [['id', 'primary_language_id', 'secondary_language_id', 'teacher_id', 'organization_id', 'hit_counter'], 'integer'],
-            [['en_title', 'pt_title', 'url', 'length', 'organizationName', 'teacherName', 'en_description', 'pt_description'], 'safe'],
+            [['en_title', 'pt_title', 'url', 'length', 'organizationName', 'teacherName'], 'safe'],
         ];
     }
 

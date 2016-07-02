@@ -97,7 +97,7 @@ class TeachingController extends Controller
         if ( $result ) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('create', [
+            return $this->render('update', [
                 'model' => $model,
             ]);
         }
