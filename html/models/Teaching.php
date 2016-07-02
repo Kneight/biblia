@@ -45,7 +45,7 @@ class Teaching extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['primary_language_id', 'en_title', 'pt_title', 'url', 'teacher_id', 'organization_id'], 'required'],
+            [['primary_language_id', 'en_title', 'pt_title', 'teacher_id', 'organization_id'], 'required'],
             [['primary_language_id', 'secondary_language_id', 'teacher_id', 'organization_id', 'hit_counter'], 'integer'],
             [['en_title', 'pt_title'], 'string', 'max' => 155],
             [['url'], 'string', 'max' => 255],
