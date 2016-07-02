@@ -82,6 +82,9 @@ class Teaching extends \yii\db\ActiveRecord
      */
     public function upload()
     {
+        if(!$this->file_upload)
+            return true; //all files (none) uploaded successfully
+
         if( !is_dir( 'uploads/' . $this->organization_id . '/Teaching' ) )
             mkdir( 'uploads/' . $this->organization_id . '/Teaching', 0775, true );
         $FileName = 'uploads/' . $this->organization_id . '/Teaching/' . urlencode( $this->file_upload->baseName ) . '.' . $this->file_upload->extension;
