@@ -46,7 +46,7 @@ class Organization extends \yii\db\ActiveRecord
             [['en_name', 'pt_name', 'photo'], 'string', 'max' => 155],
             [['en_description', 'pt_description'], 'string'],
             [['license_type_id', 'title', 'group'], 'string', 'max' => 255],
-            [['file_upload'], 'image', 'skipOnEmpty' => true, minWidth => 150, minHeight => 150],
+            [['file_upload'], 'image', 'skipOnEmpty' => true, 'minWidth' => 150, 'minHeight' => 150],
         ];
     }
 
