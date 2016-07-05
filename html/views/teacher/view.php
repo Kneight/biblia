@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'pt_name',
             'pt_description',
             'location',
-            'photo',
+            'photo:url',
             'organization_id',
         ],
     ]) ?>

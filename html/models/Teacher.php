@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\web\UploadedFile;
+use yii\helpers\BaseUrl;
 
 /**
  * This is the model class for table "teacher".
@@ -21,6 +23,8 @@ use Yii;
  */
 class Teacher extends \yii\db\ActiveRecord
 {
+    public $file_upload;
+
     /**
      * @inheritdoc
      */
@@ -39,7 +43,7 @@ class Teacher extends \yii\db\ActiveRecord
             [['organization_id'], 'integer'],
             [['en_name', 'pt_name', 'location'], 'string', 'max' => 100],
             [['en_description', 'pt_description'], 'string'],
-            [['photo'], 'string', 'max' => 255]
+            [['file_upload'], 'image', 'skipOnEmpty' => true, 'minWidth' => 150, 'minHeight' => 150],
         ];
     }
 
@@ -59,6 +63,33 @@ class Teacher extends \yii\db\ActiveRecord
             'organization_id' => 'Organization ID',
             'organizationName' => 'Organization',
         ];
+    }
+
+    /**
+     * Upload the file
+     * @return bool
+     */
+    public function upload()
+    {
+        if( !$this->file_upload )
+        {
+            return !is_null( $this->photo );
+        }
+
+        if( !is_dir( 'uploads/photo/teacher' ) )
+            mkdir( 'uploads/photo/teacher', 0775, true );
+        $FileName = 'uploads/photo/teacher/' . $this->id . '.' . $this->file_upload->extension;
+        if( $this->file_upload )
+            $this->photo = BaseUrl::toRoute( $FileName, true );
+        if ( $this->save() ) {
+            if( $this->file_upload ){
+                $this->file_upload->saveAs( $FileName );
+                Yii::$app->image->load($FileName)->resize( 150, 150, 0x07 )->background( 'FFF', 0 )->save();
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

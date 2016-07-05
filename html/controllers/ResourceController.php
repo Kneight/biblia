@@ -94,7 +94,7 @@ class ResourceController extends Controller
         if( $result && isset( $_FILES ) )
             $result = $result && $model->upload();
 
-        if ( $result ) {
+        if ( $result && $model->save() ) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
