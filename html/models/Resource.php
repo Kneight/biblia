@@ -92,7 +92,7 @@ class Resource extends \yii\db\ActiveRecord
     {
         if(!$this->file_upload)
             return true; //all files (none) uploaded successfully
-        
+
         if( !is_dir( 'uploads/' . $this->organization_id . '/Resource' ) )
             mkdir( 'uploads/' . $this->organization_id . '/Resource', 0775, true );
         $FileName = 'uploads/' . $this->organization_id . '/Resource/' . urlencode( $this->file_upload->baseName ) . '.' . $this->file_upload->extension;

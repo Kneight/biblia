@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Organization */
@@ -11,7 +12,7 @@ use yii\helpers\ArrayHelper;
 
 <div class="organization-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'en_name')->textInput(['maxlength' => true]) ?>
 
@@ -21,7 +22,21 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'pt_description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'file_upload')->widget(FileInput::classname(), [
+        'options' => ['accept' => 'image/png, image/jpg'],
+        'pluginOptions' => [
+            'showPreview' => true,
+            'showCaption' => false,
+            'showRemove' => false,
+            'showUpload' => false,
+//            'overwriteInitial'=>false,
+//            'initialCaption'=>"Current Photo",
+            'initialPreviewAsData'=>true,
+            'initialPreview'=>[
+                $model->photo,
+            ],
+        ]
+    ]); ?>
 
     <?php $licenseArray = ArrayHelper::map(\app\models\LicenseType::find()->orderBy('name')->all(), 'id', 'name') ?>
     <?= $form->field($model, 'license_type_id')->dropDownList($licenseArray, ['prompt' => '---- Select License Type ----'])->label('License Type') ?>

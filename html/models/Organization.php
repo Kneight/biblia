@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\web\UploadedFile;
+use yii\helpers\BaseUrl;
 
 /**
  * This is the model class for table "organization".
@@ -23,6 +25,8 @@ use Yii;
  */
 class Organization extends \yii\db\ActiveRecord
 {
+    public $file_upload;
+
     /**
      * @inheritdoc
      */
@@ -37,11 +41,12 @@ class Organization extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['en_name', 'en_description', 'pt_name', 'pt_description', 'photo', 'license_type_id'], 'required'],
+            [['en_name', 'en_description', 'pt_name', 'pt_description', 'license_type_id'], 'required'],
             [['year'], 'integer'],
             [['en_name', 'pt_name', 'photo'], 'string', 'max' => 155],
             [['en_description', 'pt_description'], 'string'],
             [['license_type_id', 'title', 'group'], 'string', 'max' => 255],
+            [['file_upload'], 'image', 'skipOnEmpty' => true, minWidth => 150, minHeight => 150],
         ];
     }
 
@@ -62,6 +67,33 @@ class Organization extends \yii\db\ActiveRecord
             'year' => 'Year',
             'group' => 'Group',
         ];
+    }
+
+    /**
+     * Upload the file
+     * @return bool
+     */
+    public function upload()
+    {
+        if( !$this->file_upload )
+        {
+            return !is_null( $this->photo );
+        }
+
+        if( !is_dir( 'uploads/photo/organization' ) )
+            mkdir( 'uploads/photo/organization', 0775, true );
+        $FileName = 'uploads/photo/organization/' . $this->id . '.' . $this->file_upload->extension;
+        if( $this->file_upload )
+            $this->photo = BaseUrl::toRoute( $FileName, true );
+        if ( $this->save() ) {
+            if( $this->file_upload ){
+                $this->file_upload->saveAs( $FileName );
+                Yii::$app->image->load($FileName)->resize( 150, 150, 0x07 )->background( 'FFF', 0 )->save();
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

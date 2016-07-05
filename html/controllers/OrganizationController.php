@@ -8,6 +8,7 @@ use app\models\OrganizationSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * OrganizationController implements the CRUD actions for Organization model.
@@ -81,7 +82,14 @@ class OrganizationController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $result = $model->load(Yii::$app->request->post());
+
+        $model->file_upload = UploadedFile::getInstance($model, 'file_upload');
+        if( $result && isset( $_FILES ) )
+            $result = $result && $model->upload();
+
+        if ( $result ) {
+            $model->save(false);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

@@ -44,6 +44,10 @@ $config = [
             'rules' => [
             ],
         ],
+        'image' => array(
+            'class' => 'yii\image\ImageDriver',
+            'driver' => 'GD',  //GD or Imagick
+        ),
     ],
     'params' => $params,
 ];
