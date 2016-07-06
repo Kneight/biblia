@@ -25,7 +25,7 @@ use kartik\file\FileInput;
     <?= $form->field($model, 'location')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'file_upload')->widget(FileInput::classname(), [
-        'options' => ['accept' => 'image/png, image/jpg'],
+        'options' => ['accept' => 'image/png, image/jpg, image/jpeg'],
         'pluginOptions' => [
             'showPreview' => true,
             'showCaption' => false,
