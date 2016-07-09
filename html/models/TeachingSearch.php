@@ -58,6 +58,7 @@ class TeachingSearch extends Teaching
                 'en_title',
                 'hit_counter',
                 'length',
+                'created_at',
                 'organizationName' => [
                     'asc' => ['organization.en_name' => SORT_ASC],
                     'desc' => ['organization.en_name' => SORT_DESC],

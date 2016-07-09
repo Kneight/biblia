@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'en_description:ntext',
             'pt_description:ntext',
             'resource_url:url',
+            'created_at:date',
         ],
     ]) ?>
 

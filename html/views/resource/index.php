@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'resourceTypeName',
             'organizationName',
             'teacherName',
+            'created_at:date',
             // 'primary_language_id',
             // 'secondary_language_id',
             // 'pt_name',

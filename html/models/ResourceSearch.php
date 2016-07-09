@@ -57,6 +57,7 @@ class ResourceSearch extends Resource
                 'id',
                 'en_name',
                 'hit_counter',
+                'created_at',
                 'resourceTypeName' => [
                     'asc' => ['resource_type.name' => SORT_ASC],
                     'desc' => ['resource_type.name' => SORT_DESC],

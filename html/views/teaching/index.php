@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'primary_language_id',
 //            'secondary_language_id',
             'length',
+            'created_at:date',
             'hit_counter',
 //            'pt_title',
             // 'url:url',

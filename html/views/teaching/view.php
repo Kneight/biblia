@@ -38,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'length',
             'organization_id',
             'hit_counter',
+            'created_at:date',
         ],
     ]) ?>
 
