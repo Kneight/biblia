@@ -150,6 +150,7 @@ class ResourceController extends Controller
      */
     public function actionApi( $language = 'pt', $organization = array(), $options = array() )
     {
+        header('Access-Control-Allow-Origin: *');
         $searchModel = new ResourceSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams); //we want it all
         $dataProvider->setPagination( [ 'pageSize' => 1000 ] );
