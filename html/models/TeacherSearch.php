@@ -49,6 +49,8 @@ class TeacherSearch extends Teacher
             'query' => $query,
         ]);
 
+        $query->orderBy( 'id asc' );
+
         $dataProvider->setSort( [
             'attributes' => [
                 'id',
