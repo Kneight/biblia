@@ -132,4 +132,42 @@ class TeacherController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * Output JSON array,
+     * Needs to take Organization and language
+     */
+    public function actionApi()
+    {
+        header('Access-Control-Allow-Origin: *');
+        $searchModel = new TeacherSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams); //we want it all
+        $dataProvider->setPagination( [ 'pageSize' => 1000 ] );
+        $results = $dataProvider->getModels();
+        $output = array();
+        foreach( $results as $model )
+        {
+            /* @var app/models/Organization $model
+             * @property integer id
+             * @property string en_name
+             * @property string en_description
+             * @property string pt_name
+             * @property string pt_description
+             * @property string location
+             * @property string photo
+             * @property integer organization_id
+             */
+            $output[] = [
+                'id'                => $model->getAttribute( 'id' ),
+                'en_name'           => $model->getAttribute( 'en_name' ),
+                'en_description'    => $model->getAttribute( 'en_description' ),
+                'pt_name'           => $model->getAttribute( 'pt_name' ),
+                'pt_description'    => $model->getAttribute( 'pt_description' ),
+                'photo'             => $model->getAttribute( 'photo' ),
+                'location'          => $model->getAttribute( 'location' ),
+                'organization_id'   => $model->getAttribute( 'organization_id' ),
+            ];
+        }
+        echo json_encode( $output, JSON_UNESCAPED_UNICODE );
+    }
 }
