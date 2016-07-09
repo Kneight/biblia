@@ -27,7 +27,7 @@ class OrganizationController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-//                'only' => ['logout'],
+                'only' => ['create', 'view', 'update', 'delete', 'index'],
                 'rules' => [
                     [
                         'actions' => ['update', 'index'],
@@ -38,10 +38,6 @@ class OrganizationController extends Controller
                         'actions' => ['create', 'view', 'update', 'delete', 'index'],
                         'allow' => true,
                         'roles' => ['admin'],
-                    ],
-                    [
-                        'actions' => ['api'],
-                        'allow' => true,
                     ],
                 ],
             ],

@@ -80,7 +80,7 @@ class TeachingSearch extends Teaching
             return $dataProvider;
         }
 
-        if( !Yii::$app->user->can('admin') )
+        if( !Yii::$app->user->isGuest && !Yii::$app->user->can('admin') )
         {
             $query->andWhere( [ 'teaching.organization_id' => Yii::$app->user->getIdentity()->banned_reason ] );
             $query->orWhere( [ 'teaching.organization_id' => 4 ] );

@@ -87,11 +87,9 @@ class ResourceSearch extends Resource
             return $dataProvider;
         }
 
-        if( !Yii::$app->user->can('admin') )
+        if( !Yii::$app->user->isGuest && !Yii::$app->user->can('admin') )
         {
             $query->andWhere( [ 'resource.organization_id' => Yii::$app->user->getIdentity()->banned_reason ] );
-            $query->orWhere( [ 'resource.organization_id' => 4 ] );
-            $query->orWhere( [ 'resource.teacher_id' => 3 ] );
         }
 
         $query->andFilterWhere([

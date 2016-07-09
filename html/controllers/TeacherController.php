@@ -27,16 +27,12 @@ class TeacherController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-//                'only' => ['logout'],
+                'only' => ['create', 'view', 'update', 'delete', 'index'],
                 'rules' => [
                     [
                         'actions' => ['create', 'view', 'update', 'delete', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
-                    ],
-                    [
-                        'actions' => ['api'],
-                        'allow' => true,
                     ],
                 ],
             ],

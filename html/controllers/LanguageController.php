@@ -26,16 +26,12 @@ class LanguageController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-//                'only' => ['logout'],
+                'only' => ['create', 'view', 'update', 'delete', 'index'],
                 'rules' => [
                     [
                         'actions' => ['create', 'view', 'update', 'delete', 'index'],
                         'allow' => true,
                         'roles' => ['admin'],
-                    ],
-                    [
-                        'actions' => ['api'],
-                        'allow' => true,
                     ],
                 ],
             ],

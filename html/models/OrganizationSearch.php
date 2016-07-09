@@ -58,7 +58,7 @@ class OrganizationSearch extends Organization
         }
 
 
-        if( !Yii::$app->user->can('admin') )
+        if( !Yii::$app->user->isGuest && !Yii::$app->user->can('admin') )
             $query->andWhere( [ 'id' => Yii::$app->user->getIdentity()->banned_reason ] );
 
 

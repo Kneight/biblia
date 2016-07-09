@@ -27,16 +27,12 @@ class ResourceController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-//                'only' => ['logout'],
+                'only' => ['create', 'view', 'update', 'delete', 'index'],
                 'rules' => [
                     [
                         'actions' => ['create', 'view', 'update', 'delete', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
-                    ],
-                    [
-                        'actions' => ['api'],
-                        'allow' => true,
                     ],
                 ],
             ],
@@ -103,6 +99,8 @@ class ResourceController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+
 
         $result = $model->load(Yii::$app->request->post());
 
