@@ -173,7 +173,7 @@ class OrganizationController extends Controller
              * @property string photo
              * @property string license_type_id
              */
-            $output[$model->getAttribute( 'id' )] = [
+            $output[] = [
                 'id'                => $model->getAttribute( 'id' ),
                 'en_name'           => $model->getAttribute( 'en_name' ),
                 'en_description'    => $model->getAttribute( 'en_description' ),
