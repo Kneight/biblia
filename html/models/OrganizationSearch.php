@@ -43,6 +43,8 @@ class OrganizationSearch extends Organization
     {
         $query = Organization::find();
 
+        $query->orderBy( 'id asc' );
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
