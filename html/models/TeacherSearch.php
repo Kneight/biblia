@@ -73,6 +73,11 @@ class TeacherSearch extends Teacher
             return $dataProvider;
         }
 
+        if( !Yii::$app->user->can('admin') )
+        {
+            $query->andWhere( [ 'organization_id' => Yii::$app->user->getIdentity()->banned_reason ] );
+        }
+
         $query->andFilterWhere([
             'id' => $this->id,
             'organization_id' => $this->organization_id,

@@ -8,6 +8,7 @@ use app\models\LicenseTypeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * LicenseTypeController implements the CRUD actions for LicenseType model.
@@ -21,6 +22,17 @@ class LicenseTypeController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+//                'only' => ['logout'],
+                'rules' => [
+                    [
+                        'actions' => ['create', 'view', 'update', 'delete', 'index'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
                 ],
             ],
         ];

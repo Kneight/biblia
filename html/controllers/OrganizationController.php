@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\filters\AccessControl;
 
 /**
  * OrganizationController implements the CRUD actions for Organization model.
@@ -22,6 +23,26 @@ class OrganizationController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+//                'only' => ['logout'],
+                'rules' => [
+                    [
+                        'actions' => ['update', 'index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['create', 'view', 'update', 'delete', 'index'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                    [
+                        'actions' => ['api'],
+                        'allow' => true,
+                    ],
                 ],
             ],
         ];
@@ -156,7 +177,7 @@ class OrganizationController extends Controller
              * @property string photo
              * @property string license_type_id
              */
-            $output[] = [
+            $output[$model->getAttribute( 'id' )] = [
                 'id'                => $model->getAttribute( 'id' ),
                 'en_name'           => $model->getAttribute( 'en_name' ),
                 'en_description'    => $model->getAttribute( 'en_description' ),

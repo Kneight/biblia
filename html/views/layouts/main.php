@@ -34,7 +34,7 @@ AppAsset::register($this);
         ],
     ]);
     $menu = [
-        [ 'label' => 'Home',                'url' => ['/site/index']],
+//        [ 'label' => 'Home',                'url' => ['/site/index']],
         [ 'label' => 'Languages',           'url' => ['/language/index']],
         [ 'label' => 'License Types',       'url' => ['/license-type/index']],
         [ 'label' => 'Organizations',       'url' => ['/organization/index']],
@@ -44,11 +44,12 @@ AppAsset::register($this);
         [ 'label' => 'Teachings',           'url' => ['/teaching/index']],
         [ 'label' => 'OT Books',            'url' => ['/ot-book/index']],
         [ 'label' => 'NT Books',            'url' => ['/nt-book/index']],
+        ['label' => 'User', 'url' => ['/user']],
         Yii::$app->user->isGuest ? (
-        ['label' => 'Login', 'url' => ['/site/login']]
+        ['label' => 'Login', 'url' => ['/user/login']]
         ) : (
             '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
+            . Html::beginForm(['/user/logout'], 'post')
             . Html::submitButton(
                 'Logout (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link']

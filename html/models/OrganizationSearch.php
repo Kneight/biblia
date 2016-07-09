@@ -43,7 +43,7 @@ class OrganizationSearch extends Organization
     {
         $query = Organization::find();
 
-        $query->orderBy( 'id asc' );
+        $query->addOrderBy( 'id asc' );
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -56,6 +56,11 @@ class OrganizationSearch extends Organization
             // $query->where('0=1');
             return $dataProvider;
         }
+
+
+        if( !Yii::$app->user->can('admin') )
+            $query->andWhere( [ 'id' => Yii::$app->user->getIdentity()->banned_reason ] );
+
 
         $query->andFilterWhere([
             'id' => $this->id,

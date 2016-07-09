@@ -8,6 +8,7 @@ use app\models\NtBookSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * NtBookController implements the CRUD actions for NtBook model.
@@ -21,6 +22,21 @@ class NtBookController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+//                'only' => ['logout'],
+                'rules' => [
+                    [
+                        'actions' => ['create', 'view', 'update', 'delete', 'index'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                    [
+                        'actions' => ['api'],
+                        'allow' => true,
+                    ],
                 ],
             ],
         ];
