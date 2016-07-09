@@ -148,12 +148,12 @@ class TeachingController extends Controller
      * Output JSON array,
      * Needs to take Organization and language
      */
-    public function actionApi( $language = 'pt', $organization = array(), $options = array() )
+    public function actionApi( $limit = 1000, $language = 'pt', $organization = array(), $options = array() )
     {
         header('Access-Control-Allow-Origin: *');
         $searchModel = new TeachingSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams); //we want it all
-        $dataProvider->setPagination( [ 'pageSize' => 1000 ] );
+        $dataProvider->setPagination( [ 'pageSize' => $limit ] );
         $results = $dataProvider->getModels();
         $output = array();
         foreach( $results as $model )

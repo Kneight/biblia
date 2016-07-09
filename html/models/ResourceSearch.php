@@ -52,6 +52,7 @@ class ResourceSearch extends Resource
         ]);
 
         $dataProvider->setSort( [
+            'defaultOrder' => [ 'created_at' => SORT_DESC ],
             'attributes' => [
                 'id',
                 'en_name',

@@ -52,6 +52,7 @@ class TeachingSearch extends Teaching
         ]);
 
         $dataProvider->setSort( [
+            'defaultOrder' => [ 'created_at' => SORT_DESC ],
             'attributes' => [
                 'id',
                 'en_title',
