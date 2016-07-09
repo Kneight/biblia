@@ -46,13 +46,13 @@ class ResourceSearch extends Resource
     public function search($params)
     {
         $query = Resource::find();
+        $query->orderBy( 'created_at DESC' );
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
         $dataProvider->setSort( [
-            'defaultOrder' => [ 'created_at' => SORT_DESC ],
             'attributes' => [
                 'id',
                 'en_name',

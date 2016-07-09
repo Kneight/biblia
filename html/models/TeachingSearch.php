@@ -46,13 +46,13 @@ class TeachingSearch extends Teaching
     public function search($params)
     {
         $query = Teaching::find();
+        $query->orderBy( 'created_at DESC' );
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
         $dataProvider->setSort( [
-            'defaultOrder' => [ 'created_at' => SORT_DESC ],
             'attributes' => [
                 'id',
                 'en_title',
