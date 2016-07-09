@@ -18,8 +18,8 @@ class OrganizationSearch extends Organization
     public function rules()
     {
         return [
-            [['id', 'year'], 'integer'],
-            [['en_name', 'en_description', 'pt_name', 'pt_description', 'photo', 'license_type_id', 'title', 'group'], 'safe'],
+            [['id'], 'integer'],
+            [['en_name', 'en_description', 'pt_name', 'pt_description', 'photo', 'license_type_id'], 'safe'],
         ];
     }
 
@@ -57,7 +57,6 @@ class OrganizationSearch extends Organization
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'year' => $this->year,
             'license_type_id', $this->license_type_id,
         ]);
 
@@ -65,9 +64,7 @@ class OrganizationSearch extends Organization
             ->andFilterWhere(['like', 'en_description', $this->en_description])
             ->andFilterWhere(['like', 'pt_name', $this->pt_name])
             ->andFilterWhere(['like', 'pt_description', $this->pt_description])
-            ->andFilterWhere(['like', 'photo', $this->photo])
-            ->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'group', $this->group]);
+            ->andFilterWhere(['like', 'photo', $this->photo]);
 
         return $dataProvider;
     }

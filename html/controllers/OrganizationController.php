@@ -155,9 +155,6 @@ class OrganizationController extends Controller
              * @property string pt_description
              * @property string photo
              * @property string license_type_id
-             ** @property string title
-             ** @property integer year
-             ** @property string group
              */
             $output[] = [
                 'id'                => $model->getAttribute( 'id' ),

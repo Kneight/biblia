@@ -16,9 +16,6 @@ use yii\helpers\BaseUrl;
  * @property string $pt_description
  * @property string $photo
  * @property string $license_type_id
- * @property string $title
- * @property integer $year
- * @property string $group
  *
  * @property Resource[] $resources
  * @property Teaching[] $teachings
@@ -42,10 +39,9 @@ class Organization extends \yii\db\ActiveRecord
     {
         return [
             [['en_name', 'en_description', 'pt_name', 'pt_description', 'license_type_id'], 'required'],
-            [['year'], 'integer'],
             [['en_name', 'pt_name', 'photo'], 'string', 'max' => 155],
             [['en_description', 'pt_description'], 'string'],
-            [['license_type_id', 'title', 'group'], 'string', 'max' => 255],
+            [['license_type_id'], 'integer'],
             [['file_upload'], 'image', 'skipOnEmpty' => true, 'minWidth' => 150, 'minHeight' => 150],
         ];
     }
@@ -63,9 +59,6 @@ class Organization extends \yii\db\ActiveRecord
             'pt_description' => 'Pt Description',
             'photo' => 'Photo',
             'license_type_id' => 'License Type',
-            'title' => 'Title',
-            'year' => 'Year',
-            'group' => 'Group',
         ];
     }
 

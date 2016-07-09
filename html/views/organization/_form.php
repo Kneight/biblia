@@ -41,12 +41,6 @@ use kartik\file\FileInput;
     <?php $licenseArray = ArrayHelper::map(\app\models\LicenseType::find()->orderBy('name')->all(), 'id', 'name') ?>
     <?= $form->field($model, 'license_type_id')->dropDownList($licenseArray, ['prompt' => '---- Select License Type ----'])->label('License Type') ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'year')->textInput() ?>
-
-    <?= $form->field($model, 'group')->textInput(['maxlength' => true]) ?>
-
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
