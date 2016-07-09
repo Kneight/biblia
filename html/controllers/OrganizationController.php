@@ -132,4 +132,43 @@ class OrganizationController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * Output JSON array,
+     * Needs to take Organization and language
+     */
+    public function actionApi()
+    {
+        header('Access-Control-Allow-Origin: *');
+        $searchModel = new OrganizationSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams); //we want it all
+        $dataProvider->setPagination( [ 'pageSize' => 1000 ] );
+        $results = $dataProvider->getModels();
+        $output = array();
+        foreach( $results as $model )
+        {
+            /* @var app/models/Organization $model
+             * @property integer id
+             * @property string en_name
+             * @property string en_description
+             * @property string pt_name
+             * @property string pt_description
+             * @property string photo
+             * @property string license_type_id
+             ** @property string title
+             ** @property integer year
+             ** @property string group
+             */
+            $output[] = [
+                'id'                => $model->getAttribute( 'id' ),
+                'en_name'           => $model->getAttribute( 'en_name' ),
+                'en_description'    => $model->getAttribute( 'en_description' ),
+                'pt_name'           => $model->getAttribute( 'pt_name' ),
+                'pt_description'    => $model->getAttribute( 'pt_description' ),
+                'photo'             => $model->getAttribute( 'photo' ),
+                'license_type_id'   => $model->getAttribute( 'license_type_id' ),
+            ];
+        }
+        echo json_encode( $output, JSON_UNESCAPED_UNICODE );
+    }
 }
