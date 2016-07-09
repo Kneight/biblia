@@ -80,9 +80,12 @@ class Organization extends \yii\db\ActiveRecord
             return !is_null( $this->photo );
         }
 
+        $saniName = preg_replace("/\.(jpg|png|jpeg)/", "", $this->file_upload->name);
+        $saniName = preg_replace("/[^A-Za-z0-9]/", "", $saniName);
+
         if( !is_dir( 'uploads/photo/organization' ) )
             mkdir( 'uploads/photo/organization', 0775, true );
-        $FileName = 'uploads/photo/organization/' . $this->id . '.' . $this->file_upload->extension;
+        $FileName = 'uploads/photo/organization/' . $saniName . '.' . $this->file_upload->extension;
         if( $this->file_upload )
             $this->photo = BaseUrl::toRoute( $FileName, true );
         if ( $this->save() ) {
