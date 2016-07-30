@@ -87,6 +87,7 @@ class NtBookController extends Controller
      */
     public function actionApi()
     {
+        header('Access-Control-Allow-Origin: *');
         $searchModel = new NtBookSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams); //we want it all
         $dataProvider->pagination = false;

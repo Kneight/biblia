@@ -151,6 +151,7 @@ class ResourceController extends Controller
      */
     public function actionHit( $id )
     {
+        header('Access-Control-Allow-Origin: *');
         if (($model = Resource::findOne($id)) !== null) {
             $model->hit_counter ++;
             $model->save();

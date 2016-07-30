@@ -150,6 +150,7 @@ class TeachingController extends Controller
      */
     public function actionHit( $id )
     {
+        header('Access-Control-Allow-Origin: *');
         if (($model = Teaching::findOne($id)) !== null) {
             $model->hit_counter ++;
             $model->save();
