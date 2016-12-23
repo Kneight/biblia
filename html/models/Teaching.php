@@ -20,6 +20,7 @@ use yii\helpers\BaseUrl;
  * @property string $length
  * @property integer $organization_id
  * @property integer $hit_counter
+ * @property string $sermon_date
  *
  * @property UploadedFile $file_upload
  *

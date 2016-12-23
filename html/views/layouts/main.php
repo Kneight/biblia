@@ -35,6 +35,7 @@ AppAsset::register($this);
     ]);
     $menu = [
 //        [ 'label' => 'Home',                'url' => ['/site/index']],
+        [ 'label' => 'Countries',           'url' => ['/country/index']],
         [ 'label' => 'Languages',           'url' => ['/language/index']],
         [ 'label' => 'License Types',       'url' => ['/license-type/index']],
         [ 'label' => 'Organizations',       'url' => ['/organization/index']],

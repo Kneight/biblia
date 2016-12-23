@@ -34,6 +34,8 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'length')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'sermon_date')->textInput() ?>
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

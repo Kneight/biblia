@@ -130,4 +130,30 @@ class LanguageController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * Output JSON array, Just give all the languages
+     */
+    public function actionApi()
+    {
+        header('Access-Control-Allow-Origin: *');
+        $searchModel = new LanguageSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams); //we want it all
+        $dataProvider->pagination = false;
+        $results = $dataProvider->getModels();
+        $output = array();
+
+        foreach( $results as $model )
+        {
+            /* @var app/models/NtBook $model */
+            $output[] = [
+                'id'    => $model->getAttribute( 'id' ),
+                'name'  => $model->getAttribute( 'name' ),
+                'code'  => $model->getAttribute( 'code' ),
+                'idOt'  => $model->getAttribute( 'id_ot' ),
+                'idNt'  => $model->getAttribute( 'id_nt' ),
+            ];
+        }
+        echo json_encode( $output, JSON_UNESCAPED_UNICODE );
+    }
 }

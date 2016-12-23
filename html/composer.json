@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "kartik-v/yii2-widget-fileinput": "@dev",
         "yurkinx/yii2-image": "dev-master",
-        "amnah/yii2-user": "^5.0"
+        "amnah/yii2-user": "^5.0",
+        "kartik-v/yii2-widget-datepicker": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
